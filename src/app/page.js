@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Marquee from "@/components/Marquee";
+import Marquee from "@/components/HomePage/Marquee";
 import Baner from "@/components/HomePage/Baner";
 import Increase from "@/components/HomePage/IncreaseProducts";
 import Decrease from "@/components/HomePage/DecreaseProducts";
