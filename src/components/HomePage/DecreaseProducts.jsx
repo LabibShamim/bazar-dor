@@ -1,12 +1,12 @@
 import React from "react";
 
 const Products = async () => {
-  const res = await fetch("https://api.api-store.workers.dev/api/bazardor/products");
+  const res = await fetch("https://openapi.programming-hero.com/api/bazardor/products");
   const data = await res.json();
 
-  const downProducts = [...data]
-  .filter((product) => Number(product.change?.pct) < 0)
-  .sort((a, b) => Number(b.today) - Number(a.today))
+ const downProducts = [...data]
+  .filter((product) => product.change.pct < 0)
+  .sort((a, b) => a.change.pct - b.change.pct)
   .slice(0, 6);
 
   return (

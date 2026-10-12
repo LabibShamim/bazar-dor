@@ -1,13 +1,15 @@
 import React from "react";
 
 const Products = async () => {
-  const res = await fetch("https://api.api-store.workers.dev/api/bazardor/products");
+  const res = await fetch(
+    "https://openapi.programming-hero.com/api/bazardor/products",
+  );
   const data = await res.json();
-
+  
   const topProducts = [...data]
-  .filter((product) => Number(product.change?.pct) > 0)
-  .sort((a, b) => Number(b.today) - Number(a.today))
-  .slice(0, 6);
+    .filter((product) => product.change.pct > 0)
+    .sort((a, b) => b.change.pct - a.change.pct)
+    .slice(0, 6);
 
   return (
     <section className="mx-auto  max-w-7xl  py-10 ">
@@ -21,7 +23,8 @@ const Products = async () => {
           const pct = Number(product.change?.pct ?? 0);
 
           return (
-            <div key={product.id}
+            <div
+              key={product.id}
               className="rounded-2xl border border-[#dfe7df] bg-[#f9fcf9] p-3.5 transition hover:-translate-y-0.5 hover:shadow-md"
             >
               <div className="mb-3 flex items-center gap-3">
@@ -30,9 +33,7 @@ const Products = async () => {
                 </div>
 
                 <div>
-                  <h3 className="font-bold text-[#263329]">
-                    {product.nameBn}
-                  </h3>
+                  <h3 className="font-bold text-[#263329]">{product.nameBn}</h3>
                   <p className="text-xs text-gray-500">
                     প্রতি {product.unitBn || "কেজি"}
                   </p>
@@ -58,7 +59,7 @@ const Products = async () => {
                   }`}
                 >
                   {pct > 0 ? "▲" : pct < 0 ? "▼" : "—"}{" "}
-                  {Math.abs(pct).toLocaleString("bn-BD") }%
+                  {Math.abs(pct).toLocaleString("bn-BD")}%
                 </span>
               </div>
             </div>
