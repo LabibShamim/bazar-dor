@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import { useState } from "react";
 
 export default function ProductList({ products }) {
@@ -22,7 +22,8 @@ export default function ProductList({ products }) {
           id="sort"
           value={sort}
           onChange={(e) => setSort(e.target.value)}
-          className="rounded-lg border border-[#d1d9d1] bg-transparent px-3 py-2 text-sm outline-none" >
+          className="rounded-lg border border-[#d1d9d1] bg-transparent px-3 py-2 text-sm outline-none"
+        >
           <option value="default">ডিফল্ট</option>
           <option value="low">কম থেকে বেশি</option>
           <option value="high">বেশি থেকে কম</option>
@@ -35,9 +36,10 @@ export default function ProductList({ products }) {
 
       <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {sortedProducts.map((product) => (
-          <article
+          <Link
+            href={`/product/${product.id}`}
             key={product.id}
-            className="rounded-2xl border border-[#dfe7df] bg-[#fafcf9] p-4 transition hover:shadow-md"
+            className="block rounded-2xl border border-[#dfe7df] bg-[#fafcf9] p-4 transition hover:-translate-y-1 hover:shadow-md"
           >
             <div className="flex items-center gap-3">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#f0f5f0] text-2xl">
@@ -77,7 +79,7 @@ export default function ProductList({ products }) {
                 {Math.abs(product.change?.pct || 0).toLocaleString("bn-BD")}%
               </span>
             </div>
-          </article>
+          </Link>
         ))}
       </section>
     </>

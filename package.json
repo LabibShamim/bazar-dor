@@ -9,16 +9,22 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@better-auth/mongo-adapter": "^1.7.7",
     "@fortawesome/free-brands-svg-icons": "^7.3.1",
     "@fortawesome/react-fontawesome": "^3.5.0",
+    "better-auth": "^1.7.7",
+    "mongodb": "^7.7.0",
     "next": "16.4.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-fast-marquee": "^1.6.5",
+    "react-hot-toast": "^2.6.1",
     "react-marquee-text": "^1.0.6"
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "^4",
+    "@types/node": "26.6.5",
+    "@types/react": "19.3.0",
     "babel-plugin-react-compiler": "1.0.0",
     "daisyui": "^5.7.47",
     "eslint": "^9",

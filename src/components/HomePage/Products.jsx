@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Products = async () => {
@@ -16,9 +17,10 @@ const Products = async () => {
           const pct = Number(product.change?.pct ?? 0);
 
           return (
-            <div
+            <Link
+              href={`/product/${product.id}`}
               key={product.id}
-              className="rounded-2xl border border-[#dfe7df] bg-[#f9fcf9] p-3.5 transition hover:-translate-y-0.5 hover:shadow-md"
+              className="block rounded-2xl border border-[#dfe7df] bg-[#f9fcf9] p-3.5 transition hover:-translate-y-0.5 hover:shadow-md"
             >
               <div className="mb-3 flex items-center gap-3">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#eff4ef] text-2xl">
@@ -57,7 +59,7 @@ const Products = async () => {
                   {Math.abs(pct).toLocaleString("bn-BD")}%
                 </span>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>

@@ -13,7 +13,7 @@ const Page = async ({ params }) => {
   const category = products[0];
 
   return (
-    <main className="min-h-screen bg-[#f0f5f0] px-4 py-5 text-[#202820]">
+    <div className="min-h-screen bg-[#f0f5f0] px-4 py-5 text-[#202820]">
       <div className="mx-auto max-w-7xl">
         <section className="flex items-center gap-3 rounded-2xl border border-[#dfe7df] bg-[#fafcf9] p-5">
           <div className="text-4xl">
@@ -32,7 +32,7 @@ const Page = async ({ params }) => {
 
         <ProductList products={products} />
       </div>
-    </main>
+    </div>
   );
 };
 

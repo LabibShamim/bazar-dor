@@ -1,8 +1,9 @@
 import { Noto_Serif_Bengali } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/HomePage/Navbar";
-import Footer from "@/components/HomePage/Footer";
-import Marquee from "@/components/HomePage/Marquee";
+import Navbar from "../components/HomePage/Navbar";
+import Footer from "../components/HomePage/Footer";
+import Marquee from "../components/HomePage/Marquee";
+import toast, { Toaster } from 'react-hot-toast';
 
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ["latin", "bengali"],
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
         <Marquee />
         {children}
         <Footer />
+        <Toaster position="top-right"/>
         </body>
     </html>
   );

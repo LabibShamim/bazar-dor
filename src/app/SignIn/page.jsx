@@ -1,13 +1,52 @@
 "use client";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { authClient } from "../lib/auth-client";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const SignIn = () => {
-  const handleSubmit = (e) => {
+  const router = useRouter();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    try {
+      const { error } = await authClient.signIn.email({
+        email: formData.get("email"),
+        password: formData.get("password"),
+        callbackURL: "/",
+      });
+
+      if (error) {
+        toast.error(error.message || "সাইন ইন করা যায়নি");
+        return;
+      }
+
+      toast.success("সাইন ইন সফল হয়েছে!");
+      router.push("/");
+    } catch {
+      toast.error("সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+    }
   };
+
+  const handleSocialSignIn = async (provider) => {
+    try {
+      const { error } = await authClient.signIn.social({
+        provider,
+        callbackURL: "/",
+      });
+
+      if (error) {
+        toast.error(error.message || "সাইন ইন করা যায়নি");
+      }
+    } catch {
+      toast.error("সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#f0f5f0] px-4 py-8 text-[#202820]">
       <div className="mx-auto max-w-md">
@@ -19,34 +58,32 @@ const SignIn = () => {
         </div>
 
         <div className="rounded-2xl border border-[#dce6dc] bg-[#ffffffb3] p-5 sm:p-6">
-          <form className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label
-                htmlFor="email"
-                className="mb-1.5 block text-sm font-medium"
-              >
+              <label htmlFor="email" className="mb-1.5 block text-sm font-medium">
                 ইমেইল
               </label>
               <input
                 id="email"
+                name="email"
                 type="email"
                 placeholder="আপনার ইমেইল"
+                autoComplete="email"
                 required
                 className="h-9 w-full rounded-lg border border-[#dce6dc] bg-transparent px-3 text-sm outline-none focus:border-[#078b43]"
               />
             </div>
 
             <div>
-              <label
-                htmlFor="password"
-                className="mb-1.5 block text-sm font-medium"
-              >
+              <label htmlFor="password" className="mb-1.5 block text-sm font-medium">
                 পাসওয়ার্ড
               </label>
               <input
                 id="password"
+                name="password"
                 type="password"
                 placeholder="কমপক্ষে ৮ অক্ষর"
+                autoComplete="current-password"
                 required
                 minLength={8}
                 className="h-9 w-full rounded-lg border border-[#dce6dc] bg-transparent px-3 text-sm outline-none focus:border-[#078b43]"
@@ -70,6 +107,7 @@ const SignIn = () => {
           <div className="grid grid-cols-2 gap-2">
             <button
               type="button"
+              onClick={() => handleSocialSignIn("google")}
               className="flex h-9 items-center justify-center gap-1.5 rounded-lg border border-[#dce6dc] text-xs font-semibold hover:bg-[#f0f5f0] sm:text-sm"
             >
               <FontAwesomeIcon
@@ -81,9 +119,13 @@ const SignIn = () => {
 
             <button
               type="button"
+              onClick={() => handleSocialSignIn("github")}
               className="flex h-9 items-center justify-center gap-1.5 rounded-lg border border-[#dce6dc] text-xs font-semibold hover:bg-[#f0f5f0] sm:text-sm"
             >
-              <FontAwesomeIcon icon={faGithub} className="h-4 w-4 text-black" />
+              <FontAwesomeIcon
+                icon={faGithub}
+                className="h-4 w-4 text-black"
+              />
               GitHub দিয়ে চালিয়ে যান
             </button>
           </div>
@@ -91,7 +133,7 @@ const SignIn = () => {
           <p className="mt-4 text-center text-sm">
             অ্যাকাউন্ট নেই?{" "}
             <Link
-              href="/signup"
+              href="/SignUp"
               className="font-medium text-[#078b43] hover:underline"
             >
               সাইন আপ করুন
