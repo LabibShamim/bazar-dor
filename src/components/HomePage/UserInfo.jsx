@@ -9,7 +9,6 @@ const UserInfo = () => {
   const user = session?.user;
 
   if (isPending) return <div className="w-[170px]" />;
-
   return (
     <div className="flex shrink-0 items-center justify-end">
       {user ? (
