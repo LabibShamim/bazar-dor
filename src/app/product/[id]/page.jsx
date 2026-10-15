@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ProtectedRoute from "../../../components/ProtectedRoute";
 
 const Page = async ({ params }) => {
   const { id } = await params;
@@ -40,6 +41,7 @@ const Page = async ({ params }) => {
     : today;
 
   return (
+    <ProtectedRoute>
     <main className="min-h-screen bg-[#f0f5f0] px-4 py-4 text-[#202820]">
       <div className="mx-auto max-w-5xl">
         <p className="mb-4 text-sm text-gray-500">
@@ -169,6 +171,7 @@ const Page = async ({ params }) => {
         </section>
       </div>
     </main>
+    </ProtectedRoute>
   );
 };
 

@@ -6,13 +6,13 @@ const Products = async () => {
   const data = await res.json();
 
   return (
-    <section className="mx-auto max-w-7xl py-10 ">
+    <section id="সব-পণ্য" className="mx-auto max-w-7xl px-4 py-10 scroll-mt-6">
       <h2 className=" text-xl font-bold text-[#263329]">
         সব পণ্য
       </h2>
       <h2 className="py-2 text-mauve-500">মোট ৩৩টি পণ্য দেখানো হচ্ছে</h2>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
         {data.map((product) => {
           const pct = Number(product.change?.pct ?? 0);
 

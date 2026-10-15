@@ -22,9 +22,9 @@ const Baner = () => {
           বিস্তারিত, গড়, সর্বনিম্ন-সর্বাধিক এবং দামের পরিবর্তন এক জায়গায়।
         </p>
 
-        <button className="btn min-h-9 h-9 rounded-[8px] border-none bg-[#078b43] px-5 text-sm text-white shadow-md hover:bg-[#067537]">
+        <a href="#সব-পণ্য" className="inline-flex h-10 items-center rounded-lg bg-[#078b43] px-5 text-sm font-semibold text-white shadow-md transition hover:bg-[#067537]">
           সব পণ্য দেখুন
-        </button>
+        </a>
       </div>
 
       <div className="hidden shrink-0 items-center justify-center sm:flex">

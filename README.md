@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# বাজার দর (BazarDor)
 
-## Getting Started
+বাংলাদেশের নিত্যপ্রয়োজনীয় পণ্যের আজকের দাম, দামের পরিবর্তন এবং বিভিন্ন বাজারের দাম সহজে দেখার জন্য তৈরি একটি responsive Next.js অ্যাপ।
 
-First, run the development server:
+## প্রযুক্তি
+- Next.js App Router
+- React ও JavaScript
+- Tailwind CSS / DaisyUI utility classes
+- Better Auth (ইমেইল-পাসওয়ার্ড এবং Google/GitHub OAuth)
+- MongoDB
+- React Hot Toast
+- Programming Hero BazarDor API
+
+## প্রধান ফিচার
+1. মোবাইল, ট্যাবলেট ও ডেস্কটপে ব্যবহারযোগ্য responsive layout
+2. আজ দাম বেড়েছে এবং কমেছে—শীর্ষ পণ্যের তালিকা
+3. চলমান price ticker এবং সব পণ্যের কার্ড
+4. ক্যাটাগরি অনুযায়ী পণ্য দেখা ও দাম কম/বেশি অনুযায়ী sort
+5. সাইন আপ, সাইন ইন, Google/GitHub login ও toast feedback
+6. লগইন-সুরক্ষিত product details এবং বাজারভিত্তিক দাম
+7. Profile থেকে আলাদা Update Information পেজে নাম পরিবর্তন
+8. Loading skeleton এবং friendly 404 page
+
+## শুরু করার নিয়ম
+
+1. Node.js-এর উপযুক্ত LTS সংস্করণ ইনস্টল করুন।
+2. `.env.example` কপি করে `.env.local` নাম দিন এবং নিজের credentials বসান।
+3. প্যাকেজ ইনস্টল করুন:
+
+```bash
+npm install
+```
+
+4. Development server চালান:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+তারপর `http://localhost:3000` খুলুন। Production build যাচাই করতে `npm run build` চালান।
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Environment variables
+- `BETTER_AUTH_SECRET`: দীর্ঘ random secret
+- `BETTER_AUTH_URL`: অ্যাপের base URL
+- `NEXT_PUBLIC_BETTER_AUTH_URL`: browser auth client-এর base URL
+- `MONGODB_URI`: MongoDB connection string
+- `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET`: Google OAuth credentials
+- `GITHUB_CLIENT_ID` / `GITHUB_CLIENT_SECRET`: GitHub OAuth credentials
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Google/GitHub login ব্যবহার করতে সংশ্লিষ্ট provider-এর OAuth app তৈরি করে credentials এবং callback URL Better Auth configuration-এর সঙ্গে মিলিয়ে দিন। বাস্তব `.env.local` বা secret GitHub-এ commit করবেন না।
 
-## Learn More
+## Deploy (Vercel)
+GitHub repository Vercel-এ import করুন, উপরের environment variables Vercel Project Settings-এ যোগ করুন, তারপর deploy করুন। Production domain অনুযায়ী `BETTER_AUTH_URL` ও OAuth callback URLs আপডেট করুন।
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Data source
+পণ্যের তথ্য Programming Hero BazarDor API থেকে আসে। দাম সম্ভাব্য এবং বাজারের অবস্থার সঙ্গে পরিবর্তিত হতে পারে।

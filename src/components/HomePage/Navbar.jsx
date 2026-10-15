@@ -10,7 +10,7 @@ const Navbar = () => {
   });
   return (
     <nav >
-      <div className="w-full max-w-7xl mx-auto py-4 flex items-center justify-between ">
+      <div className="w-full max-w-7xl mx-auto px-4 py-4 flex flex-wrap items-center justify-between gap-3 ">
         <Link href="/">
           <div className="flex items-center gap-2">
             <div className="bg-green-600 rounded-[10px] p-3">

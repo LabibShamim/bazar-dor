@@ -1,5 +1,6 @@
 import React from "react";
 import ProductList from "./ProductList";
+import { notFound } from "next/navigation";
 
 const Page = async ({ params }) => {
   const { id } = await params;
@@ -11,6 +12,7 @@ const Page = async ({ params }) => {
   const data = await res.json();
   const products = Array.isArray(data) ? data : [];
   const category = products[0];
+  if (!category) notFound();
 
   return (
     <div className="min-h-screen bg-[#f0f5f0] px-4 py-5 text-[#202820]">

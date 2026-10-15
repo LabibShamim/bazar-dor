@@ -13,13 +13,13 @@ const Products = async () => {
     .slice(0, 6);
 
   return (
-    <section className="mx-auto  max-w-7xl  py-10 ">
+    <section className="mx-auto  max-w-7xl px-4 py-10 ">
       <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-[#263329]">
         <span className="text-red-500">▲</span>
         আজ দাম বেড়েছে
       </h2>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
         {topProducts.map((product) => {
           const pct = Number(product.change?.pct ?? 0);
 
