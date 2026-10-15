@@ -9,8 +9,6 @@ const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ["latin", "bengali"],
 });
 
-
-
 export const metadata = {
   title: "বাজার দর | BazarDor",
   description: "চাল, ডাল, তেল, সবজি, মাছ ও নিত্যপ্রয়োজনীয় পণ্যের আজকের বাজারদর এক নজরে দেখুন।",
