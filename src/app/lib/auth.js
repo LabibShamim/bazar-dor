@@ -15,14 +15,15 @@ if (!process.env.BETTER_AUTH_SECRET) {
 
 const globalForMongo = globalThis;
 
-const client =
-  globalForMongo.bazarDorMongoClient ||
-  new MongoClient(uri);
+const clientPromise =
+  globalForMongo.bazarDorMongoClientPromise ??
+  new MongoClient(uri).connect();
 
 if (process.env.NODE_ENV !== "production") {
-  globalForMongo.bazarDorMongoClient = client;
+  globalForMongo.bazarDorMongoClientPromise = clientPromise;
 }
 
+const client = await clientPromise;
 const db = client.db("bazar-dor");
 
 export const auth = betterAuth({
@@ -30,9 +31,9 @@ export const auth = betterAuth({
   secret: process.env.BETTER_AUTH_SECRET,
 
   trustedOrigins: [
-    "https://bazar-dor-mkje.vercel.app",
+    process.env.BETTER_AUTH_URL,
     "http://localhost:3000",
-  ],
+  ].filter(Boolean),
 
   database: mongodbAdapter(db, {
     client,
