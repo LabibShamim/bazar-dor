@@ -182,7 +182,7 @@ const SignUp = () => {
             onClick={() => handleSocialSignIn("github")}
             className="flex items-center justify-center gap-2 rounded-lg border border-[#dfe7df] px-2 py-2 text-xs font-semibold hover:bg-[#f0f5f0]"
           >
-            <FontAwesomeIcon icon={faGithub} className="h-4 w-4 text-black" />
+            <FontAwesomeIcon icon={faGithub} className="h-4 w-4 text-black"/>
             GitHub
           </button>
         </div>
