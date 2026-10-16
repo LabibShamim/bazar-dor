@@ -1,3 +1,4 @@
+
 import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
@@ -8,7 +9,20 @@ if (!uri) {
   throw new Error("MONGODB_URI is missing in environment variables");
 }
 
-const client = new MongoClient(uri);
+if (!process.env.BETTER_AUTH_SECRET) {
+  throw new Error("BETTER_AUTH_SECRET is missing");
+}
+
+const globalForMongo = globalThis;
+
+const client =
+  globalForMongo.bazarDorMongoClient ||
+  new MongoClient(uri);
+
+if (process.env.NODE_ENV !== "production") {
+  globalForMongo.bazarDorMongoClient = client;
+}
+
 const db = client.db("bazar-dor");
 
 export const auth = betterAuth({
@@ -17,6 +31,7 @@ export const auth = betterAuth({
 
   trustedOrigins: [
     "https://bazar-dor-mkje.vercel.app",
+    "http://localhost:3000",
   ],
 
   database: mongodbAdapter(db, {
